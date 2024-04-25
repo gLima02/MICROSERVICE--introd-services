@@ -5,5 +5,6 @@ import { RotaComponent } from './componentes/rota/rota.component';
 export const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'nova-rota', component: RotaComponent},
+  // '**' faz com que qualquer endereco leve ao home
   {path: '**', component:HomeComponent}
 ];
