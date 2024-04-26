@@ -52,7 +52,8 @@ clientForm: FormGroup = new FormGroup({});
   }
 
   listar():void{
-    this.clientes = this.clienteService.listar();
+    //acionada assim que é feita a requisicao
+    this.clienteService.listar().subscribe((listaCliente) => (this.clientes = listaCliente));
   }
 
 remover(id:string):void{

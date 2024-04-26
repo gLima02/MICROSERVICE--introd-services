@@ -1,5 +1,8 @@
+import { Observer } from './../../../node_modules/dot-prop/node_modules/type-fest/source/observable-like.d';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cliente } from '../interfaces/Cliente';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -7,18 +10,22 @@ import { Cliente } from '../interfaces/Cliente';
 })
 export class ClienteService {
 
-  constructor() { }
+  private clientesUrl ="http://localhost:3000/clientes"
+  constructor(private http: HttpClient) { 
+
+    
+
+  }
 // lista que virá da API
 // nesse exemplo vem do Cliente.ts
   clientes:Cliente[] = [
-    {id: "teste1", nome: "Thiago"},
-    {id: "teste2", nome:"Teste 2", telefone:"551192756492"}
+
   ];
 
 
-  listar():Cliente[]{
-    return this.clientes;
-
+  listar():Observable<Cliente[]>{
+    //return this.clientes;
+    return this.http.get<Cliente[]>(this.clientesUrl) as Observable<Cliente[]>;
   }
   remover(id:string){
     const cliente = this.clientes.find(c => c.id == id);
